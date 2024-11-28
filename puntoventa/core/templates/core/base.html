@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %} |PV</title>
+    <link rel="stylesheet" href="{% static 'core/css/base-style.css' %}">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!--  CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'core/fonts' %}">
+</head>
+<body>
+
+    <input type="checkbox" id="checkbox"> <!-- Mueve el checkbox aquí -->
+    <header>
+        <nav class="nav">
+            <div class="contenedor-izquerdo">
+                <label for="checkbox" class="label-menu"> = </label>
+                <div class="nav__logo-container">
+                    <img class="nav__logo" src="{% static 'core/imagenes/logo.png' %}" alt="">
+                </div>
+                <h3>Nombre de la tienda</h3>
+            </div>
+            
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">About Us</a></li>
+                <li class="nav__item"><a href="#" class="nav__link">Ejemplo</a></li>
+                <li class="nav__item"><a href="{% url 'login' %}" class="nav__link link--login">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <aside>
+        <div class="menu-lateral__container">
+            <div class="menu-lateral__contenido">
+                <ul class="menu-lateral__list">
+                    <li class="menu-lateral__items"><a href="#" class="menu-lateral__links"> Categorias</a></li>
+                    <li class="menu-lateral__items"><a href="#" class="menu-lateral__links"> Productos </a></li>
+                    <li class="menu-lateral__items"><a href="#" class="menu-lateral__links"> Ventas</a></li>
+                    <li class="menu-lateral__items"><a href="#" class="menu-lateral__links"> Reporte de ventas</a></li>
+                    <li class="menu-lateral__items"><a href="#" class="menu-lateral__links"> Usuarios</a></li>
+                </ul>
+                <label for="checkbox" class="icono-x">x</label>
+            </div>
+        </div>
+    </aside>
+    <div class="main-content-box">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    
+    
+
+
+        
+</body>
+</html>
