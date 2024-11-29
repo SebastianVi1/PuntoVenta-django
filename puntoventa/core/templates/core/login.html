@@ -1,8 +1,10 @@
 {% extends 'core/base.html' %}
 {% load static %}
+
+
 {% block css-styles %}
-    <link rel="stylesheet" href="{% static 'core/css/sign-in.css' %}">
-{% endblock %}
+    <link rel="stylesheet" href="{% static 'core/css/log-in.css' %}">
+{% endblock css-styles %}
 
 
 {% block content %}
@@ -12,8 +14,8 @@
         <form >
             <input type="text" class="signin__input" placeholder="Usuario">
             <input type="password" class="signin__input" placeholder="Contrasena">
-            <button class="btn-signin">Verificar</button>
+            <button class="btn-log-in">Verificar</button>
         </form>
     </div>
-{% endblock %}
+{% endblock content %}
     

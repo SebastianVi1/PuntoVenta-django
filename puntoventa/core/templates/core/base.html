@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+        
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} {% endblock %} |PV</title>
+    <title>{% block title %} {% endblock title %} |PV</title>
     
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,9 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!--  CSS -->
     <link rel="stylesheet" href="{% static 'core/css/base-style.css' %}">
+    {% block css-styles %}{% endblock css-styles %}
+
     
-    {% block css-styles %}{% endblock %}
-        
 </head>
 <body>
 
@@ -25,7 +27,7 @@
                 <div class="nav__logo-container">
                     <img class="nav__logo" src="{% static 'core/imagenes/logo.png' %}" alt="">
                 </div>
-                <h3>Fraiche</h3>
+                <h3>Mamitas club</h3>
             </div>
             
             <ul class="nav__list">

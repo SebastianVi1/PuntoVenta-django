@@ -6,9 +6,8 @@ body {
 
 .main-content  {
   display: flex;
-  height: 100vh;
+  margin-top: 30vh;
   width: 100%;
-  align-items: center;
   justify-content: center;
 }
 
@@ -16,7 +15,6 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 40%;
-  
   padding: 40px;
   justify-content: center;
   text-align: center;
@@ -38,7 +36,8 @@ body {
   margin: 10px;
   outline: none;
   border: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #000;
+  
   text-align: start;
 }
 
@@ -46,7 +45,7 @@ aside {
   display: none;
 }
 
-.btn-signin {
+.btn-log-in {
   padding: 12px;
   border-radius: 10px;
   border: none;
@@ -57,7 +56,7 @@ aside {
   font-family: 'Montserrat', sans-serif;
   filter: drop-shadow(0px 0px 2px #000);
 }
-.btn-signin:hover {
+.btn-log-in:hover {
   border: none;
   background-color: #48e;
   color: #fff;

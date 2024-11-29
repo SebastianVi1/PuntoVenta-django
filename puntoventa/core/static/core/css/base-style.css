@@ -39,6 +39,7 @@ header{
     display: flex;
     gap: 20px;
     align-items: center;
+    
 }
 
 .nav__logo-container {
@@ -120,7 +121,8 @@ aside {
     
 }
 .menu-lateral__items:hover {
-    border-left: 3px solid #fff
+    border-left: 3px solid #fff;
+    padding-left: 25px;
 }
 
 .menu-lateral__items {
@@ -133,7 +135,4 @@ aside {
 }
 /* -----FIN MENU LATERAL----- */
 
-
-.main-content {
-    width: 100%;
-}
+/* MEDIA QUERIS */
