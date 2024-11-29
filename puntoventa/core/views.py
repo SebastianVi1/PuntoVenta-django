@@ -6,3 +6,6 @@ def home(request):
 
 def login(request):
     return render(request, 'core/login.html')
+
+def products(request):
+    return render(request, 'core/productos.html')

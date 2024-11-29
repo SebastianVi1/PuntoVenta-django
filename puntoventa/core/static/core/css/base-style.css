@@ -1,14 +1,17 @@
-body {
-    margin: 0;
-    padding: 0;
+body{
     font-family: "Montserrat",sans-serif;
     font-weight: 500;
     box-sizing: border-box;
-    height: 100vh;
+    min-height: 100vh;
     
 }
+body,html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 
-* ,div{
+}
+* {
     box-sizing: border-box;
 }
    /* -----BARRA DE NAVEGACION----- */
@@ -16,8 +19,13 @@ body {
 header{
     width: 100%;
     position: relative;
-    position: absolute;
+    order: 2;
+    box-shadow: 0px 0px 10px #000;
 }
+.main-wrapper {
+    display: flex;
+}
+
 .nav {
     display: flex;
     justify-content: space-between;
@@ -35,7 +43,7 @@ header{
 
 .nav__logo-container {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
     text-wrap: balance;
     
@@ -56,20 +64,19 @@ header{
     padding: 10px;
     flex: 1;
     outline: #000;
-    transition: background-color 0.24s, outline 0.24s, outline-offset 0.20s;
+    transition: background-color 0.24s;
     
 }
 
 .nav__link:hover{
     background-color: #0005;
     border-radius: 8px;
-    outline: 2px solid #000;
-    outline-offset: -6px;
+    
 }
 
 .nav__logo{
     width: 60px;
-    height: auto;
+    min-height: auto;
     margin: 3px 0;
 }
 .link--login {
@@ -78,6 +85,7 @@ header{
     margin-left: 20px;
     padding: 10px 20px;
     font-weight: 600;
+    box-shadow: 0px 0px 5px #000;
     
 }
 .label-menu {
@@ -92,111 +100,40 @@ header{
     
 }
 /* ----MENU LATERAL----- */
-
-.menu-lateral__container {
-    position:absolute;
-    width: 100%;
+aside {
+    padding: 0;
+    margin: 0;
+    min-width: 250px;
+    background-color: #444;
     height: 100vh;
-    background-color: #0008;
-    transition: all 500ms ease;
-    visibility: hidden;
-    opacity: 0;
-
-}
-#checkbox:checked ~ .menu-lateral__container {
-    opacity: 1;
-    visibility: visible;
-}
-
-.menu-lateral__contenido{
+    box-shadow: 0px 0px 10px #000;
     
-    padding-top: 10px;
-    width: 100%;
-    max-width: 250px;
-    background-color: #1c1c1c;
-    height: 100vh;
-    position:relative;
-    transition: all 500ms ease;
-
     
-}
-.icono-x {
-    position:absolute;
-    color: #fff;
-    font-size: 20px;
-    right: 5px;
-    top: 0px;
-}
-
-.icono-x:hover {
-    text-decoration: underline;
 }
 .menu-lateral__list {
     list-style: none;
     padding: 0;
     margin: 0;
-    transition: background-color 0.5s;
-    
-}
-
-.menu-lateral__list:hover {
-
-}
-
-.menu-lateral__links{
     display: flex;
-    justify-content: center;
-    color: #fff;
-    font-style: none;
-    text-decoration: none;
-    padding: 20px;
-    border: none;
-    margin: 10px;
-    
+    flex-direction: column;
+    padding: 10px;
     
 }
-.menu-lateral__links:hover {
-    opacity: 80%;
-    border-left: 4px solid #fff;
+.menu-lateral__items:hover {
+    border-left: 3px solid #fff
+}
+
+.menu-lateral__items {
+    padding: 20px;
+}
+.menu-lateral__links {
+    text-decoration: none;
+    color: #fff;
+    
 }
 /* -----FIN MENU LATERAL----- */
 
 
-
-
- /* ------SECCICON DE LOGIN----- */
-.form-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-}
-.form {
-    display: flex;
-    max-width: 400px;
-    max-height: 400px;
-    border: 1px solid #000;
-    background-color: #ccc;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0px 0px 30px #0004;
-    border-radius: 10px;
-}
-.form__input {
-    margin: 10px;
-    padding: 6px;
-    border-radius: 10px;
-    border:none;
-    border-bottom: 2px solid #000;
-}
-
-.input--submit{
-    background-color: #48e;
-}
-
-.form__title{
-    font-size: 25px;
-    padding: 0;
+.main-content {
+    width: 100%;
 }
