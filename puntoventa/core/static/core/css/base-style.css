@@ -123,8 +123,12 @@ aside {
 .menu-lateral__items:hover {
     border-left: 3px solid #fff;
     padding-left: 25px;
-}
 
+}
+.menu-lateral__items:active{
+    border-left: 3px solid #fff;
+    padding-left: 25px;
+}
 .menu-lateral__items {
     padding: 20px;
 }

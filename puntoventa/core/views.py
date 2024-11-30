@@ -9,3 +9,9 @@ def login(request):
 
 def products(request):
     return render(request, 'core/productos.html')
+
+def inventory(request):
+    return render(request, 'core/inventory.html')
+
+def sales(request):
+    return render(request, 'core/inventory.html')

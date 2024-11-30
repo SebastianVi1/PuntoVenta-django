@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block css-styles %}
+    <link rel="stylesheet" href="{% static 'core/css/inventory-style.css' %}">
+{% endblock css-styles %}
+
+
+{% block content %}
+    <div class="main-box">
+        <thead>
+            <tr>
+                <th scope="col">Numero</th>
+                <th scope="col">Nombre producto</th>
+                <th scope="col">Precio </th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Cantidad en stock</th>
+            </tr>
+        </thead>
+        
+    </div>
+{% endblock content %}
+    
