@@ -8,17 +8,35 @@
 
 
 {% block content %}
-    <div class="main-box">
-        <thead>
-            <tr>
-                <th scope="col">Numero</th>
-                <th scope="col">Nombre producto</th>
-                <th scope="col">Precio </th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Cantidad en stock</th>
-            </tr>
-        </thead>
-        
-    </div>
+<div class="main-box">
+  
+  <table class="table">
+    <thead>
+        <tr>
+          <th>No.</th>
+          <th>Nombre producto</th>
+          <th>Precio </th>
+          <th>Categoria</th>
+          <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for producto in productos %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><a href="{% url 'modify_product' producto.id_unico %}">{{producto.nombre}}</a></td>
+          <td>{{producto.precio}}</td>
+          <td>{{producto.categoria}}</td>
+          <td>{{producto.stock}}</td>
+          
+        </tr>
+      {% endfor %}
+
+    </tbody>
+    <tfoot>
+      
+    </tfoot>
+  </table>
+</div>
 {% endblock content %}
     
