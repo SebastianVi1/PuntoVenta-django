@@ -3,7 +3,7 @@
 
 <!-- ETIQUETA DE TITULO -->
 {% block title %}
-Productos
+  Productos
 {% endblock %}
 
 <!-- ETIQUETA DE CSS -->
@@ -33,19 +33,28 @@ Productos
       <input type="text" name="precio_producto" autocomplete="off" >
 
       <label for="productos">Stock:</label>
-      <input type="number" name="stock_producto" autocomplete="off" value="1">
+      <input type="number" name="stock_producto" autocomplete="off" >
 
       <label for="productos">Descripcion del producto:</label>
       <textarea class="form__textarea" name="descripcion_productos"></textarea>
       <button type="submit" class="btn-agregar">Agregar</button>
     </form>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="message"><p>{{ message }}</p></div>
+        {% endfor %}
+    </div>
+    {% if mensaje_error %}
+      <div class="error_mensaje">
+        <p>{{mensaje_error}}</p>
+      </div>
+    {% endif %}
+  {% endif %}
   </div>
+  
 </div>
 
-{% if mensaje_error %}
-  <div class="error_mensaje">
-    <p>{{mensaje_error}}</p>
-  </div>
-{% endif %}
+
 
 {% endblock %}

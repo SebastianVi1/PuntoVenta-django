@@ -8,8 +8,16 @@
 
 
 {% block content %}
-<div class="main-box">
+
+<div class="buttons-container">
+  <form action="{% url 'inventory' %}" method="get">
+    <a href="?orden=categoria" class="btn-ordenamiento">Ordenar por categoria</a>
+    <a href="?orden=precio" class="btn-ordenamiento"> Ordenar por precio</a>
+    <a href="?orden=stock" class="btn-ordenamiento">Ordenar por stock</a>
+  </form>
   
+</div>
+<div class="table-container">
   <table class="table">
     <thead>
         <tr>

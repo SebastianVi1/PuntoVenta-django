@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Producto
 from django.db import IntegrityError
 from decimal import Decimal
+from django.contrib import messages
+
 # Create your views here.
 def lista_productos(request):
     productos = Producto.objects.all()
@@ -24,6 +26,7 @@ def agregar_producto(request):
             try:
                 # Convertir precio y stock a tipos numéricos
                 precio = Decimal(precio)
+                
                 stock = int(stock)
 
                 # Crear el producto
@@ -34,6 +37,7 @@ def agregar_producto(request):
                     stock=stock,
                     descripcion=descripcion
                 )
+                messages.success(request, f" {nombre} agregado correctamente")
                 return redirect('products')  # Redirige a la lista de productos
 
             except IntegrityError:

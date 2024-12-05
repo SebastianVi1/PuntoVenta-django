@@ -1,7 +1,9 @@
 body {
     background-color: #F1F0E8;
 }
-
+* {
+    box-sizing: border-box;
+}
 .main-content {
     width: 100%;
     display: flex;
@@ -10,7 +12,7 @@ body {
     
 }
 
-.main-box {
+.table-container {
     display: flex;
     width: 100%;
     max-width: 80%;
@@ -47,3 +49,26 @@ th {
 .table th {
     line-height: 35px;
 }
+
+/* ------BOTONES DE ORDENAMIENTO--------- */
+.buttons-container{
+    margin: 30px 0px 0px 0px;
+    
+}
+
+.btn-ordenamiento {
+    padding: 10px;
+    background-color: #48e;
+    outline: none;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 10px #001;
+    margin: 0px 10px;
+    color: #eee;
+    text-decoration: none;
+}
+.btn-ordenamiento:hover {
+    opacity: 90%;
+}
+
+/* -------FIN BOTONES ORDENAMIENTO------- */
