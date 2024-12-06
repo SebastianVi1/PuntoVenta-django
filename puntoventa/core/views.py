@@ -3,15 +3,57 @@ from productos.models import Producto
 from productos.forms import ProductoForm
 from decimal import Decimal
 from django.contrib import messages
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from .forms import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
+
 # Create your views here.
 def home(request):
     return render(request, 'core/base.html')
 
-def login(request):
-    return render(request, 'core/login.html')
 
-def sales(request):
-    return render(request, 'core/inventory.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            # Autenticar al usuario con el nombre de usuario y la contraseña
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # Iniciar sesión del usuario autenticado
+                login(request, user)
+                return redirect('home')  # Redirige al home o la página que desees
+            else:
+                messages.error(request, "Nombre de usuario o contraseña incorrectos.")
+        else:
+            messages.error(request, "Formulario inválido")
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'core/login.html', {'form': form})
+
+
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  # Encripta la contraseña
+            user.save()
+            messages.success(request, "Usuario registrado con éxito.")
+            return redirect('login')  # Redirige a la página de inicio de sesión
+    else:
+        form = RegisterForm()
+    return render(request, 'core/register.html', {'form': form})
+
+
 
 def inventory(request):
     orden = request.GET.get('orden', 'nombre')
@@ -27,13 +69,15 @@ def inventory(request):
 
     return render(request, 'core/inventory.html', {'productos':productos})
 
+
+
+
+
 def modify_product(request, id_unico):
      # Obtiene el producto o lanza un error 404 si no existe
     producto = get_object_or_404(Producto, id_unico=id_unico)
     
     if request.method == 'POST':
-
-        
 
         # Actualizar los campos del producto con los nuevos datos
         producto.nombre = request.POST.get('nombre_producto', producto.nombre)

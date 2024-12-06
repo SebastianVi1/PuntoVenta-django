@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!-- ETIQUETA DE TITULO -->
+{% block title %}
+Productos
+{% endblock %}
+
+<!-- ETIQUETA DE CSS -->
+
+ {% block css-styles %}
+  <link rel="stylesheet" href="{% static 'core/css/register-style.css' %}">
+ {% endblock css-styles %}
+
+
+
+{% block content %}
+
+<form method="post" class="form_register">
+    <div class="form_title">
+        <h2>Registro</h2>
+    </div>
+    {% csrf_token %}
+    {{ form.as_p }} <!-- Esto genera automáticamente los campos del formulario -->
+    <button type="submit">Registrarse</button>
+</form>
+</div>
+{% endblock content %}
+    
