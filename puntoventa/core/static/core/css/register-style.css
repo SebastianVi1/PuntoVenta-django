@@ -1,0 +1,104 @@
+body, html {
+    font-family: 'Arial', sans-serif;
+    background-color: #F1F0E8;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+* {
+  box-sizing: border-box;
+}
+  /* Contenedor principal para centrar el formulario */
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ /* Mantiene la altura completa de la ventana */
+    width: 100%;
+    margin: 0; /* Elimina el margen adicional */
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  /* Contenedor del formulario */
+  .form_register {
+    
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0px 4px 10px #000;
+  }
+  
+  /* Título del formulario */
+  .form_title h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Estilo para las etiquetas */
+  .form_register label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  
+  /* Estilo para los inputs */
+  .form_register input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    font-family: 'Montserrat' ,sans-serif;
+    font-weight: 600;
+
+  }
+  
+  .form_register input:focus {
+    border-color: #4d90fe;
+    box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
+  }
+  
+  /* Estilo para el botón */
+  .form_register button {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    outline: 1px solid #48e;
+    width: 100%;
+    margin-top: 40px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    filter: drop-shadow(0px 0px 2px #000);
+}
+
+.form_register button:hover {
+    border: none;
+    background-color: #48e;
+    color: #fff;
+
+  }
+  
+  /* Estilo para los mensajes de error y éxito */
+  .error-message, .success-message {
+    color: #ff3333;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    color: #4CAF50;
+  }
+  

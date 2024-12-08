@@ -21,9 +21,11 @@ header{
     position: relative;
     order: 2;
     box-shadow: 0px 0px 10px #000;
+    
 }
 .main-wrapper {
     display: flex;
+    height: 100vh;
 }
 
 .nav {
@@ -104,9 +106,10 @@ header{
 aside {
     padding: 0;
     margin: 0;
-    min-width: 250px;
+    max-width: 250px;
+    min-width: 240px;
     background-color: #444;
-    height: 100vh;
+    height: 800vh;
     box-shadow: 0px 0px 10px #000;
     
     
@@ -136,6 +139,12 @@ aside {
     text-decoration: none;
     color: #fff;
     
+}
+
+.main-content{
+    flex-grow: 1;
+    height: 100vh;
+    overflow-y: auto;
 }
 /* -----FIN MENU LATERAL----- */
 

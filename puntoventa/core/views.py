@@ -8,15 +8,20 @@ from django.db.models import Max
 from django.contrib.auth.models import User
 from .forms import RegisterForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+@login_required
 def home(request):
     return render(request, 'core/base.html')
 
-
+@login_required
 def sales(request):
     return render(request, 'core/inventory.html')
 
+@login_required
 def inventory(request):
     orden = request.GET.get('orden', 'nombre')
     if orden == 'precio':
@@ -31,6 +36,7 @@ def inventory(request):
 
     return render(request, 'core/inventory.html', {'productos':productos})
 
+@login_required
 def modify_product(request, id_unico):
      # Obtiene el producto o lanza un error 404 si no existe
     producto = get_object_or_404(Producto, id_unico=id_unico)
@@ -60,6 +66,7 @@ def modify_product(request, id_unico):
         return redirect('modify_product', id_unico=id_unico)
     return render(request, 'core/modify_product.html', {'producto':producto})
 
+@login_required
 def delete_product(request, id_unico):
     producto = get_object_or_404(Producto, id_unico=id_unico)
     if request.method == 'POST':
@@ -67,7 +74,7 @@ def delete_product(request, id_unico):
         
         return redirect('inventory')
     
-
+@login_required
 def ventas(request):
     productos = Producto.objects.all()
     carrito = request.session.get('carrito', [])
@@ -151,6 +158,7 @@ def ventas(request):
         'cambio': float(cambio)
     })
 
+@login_required
 def reporte_ventas(request):
     ventas_agrupadas = {}
     ventas = ReporteVenta.objects.all()
@@ -173,16 +181,18 @@ def reporte_ventas(request):
         'ventas_agrupadas': ventas_agrupadas
     })
 
+@login_required
 def eliminar_todas_ventas(request):
     if request.method == 'POST':
         ReporteVenta.objects.all().delete()
         return redirect('reporte_ventas')
-    
+
+@login_required 
 def listar_usuarios(request):
     usuarios = User.objects.all()  # Obtiene todos los usuarios
     return render(request, 'core/users.html', {'usuarios': usuarios})
 
-#Verificamos si un usuario es admin
+@login_required
 def is_admin(user):
     return user.is_superuser
 
@@ -190,7 +200,7 @@ def is_admin(user):
 # def no_admin(request):
 #     return render(request, 'core/admin_dashboard.html')
 
-
+@login_required
 def register_user(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -209,3 +219,40 @@ def register_user(request):
         form = RegisterForm()
     return render(request, 'core/register.html', {'form': form})
 
+@login_required
+def delete_user(request, user_id):
+
+    if not request.user.is_superuser:
+        return redirect('listar_usuarios')  # Solo superusuarios pueden borrar usuarios
+    
+    user_to_delete = get_object_or_404(User, id=user_id)
+
+    if request.method == 'POST':
+        user_to_delete.delete()
+        return redirect('listar_usuarios')  # Redirigir después de borrar al listado de usuarios
+
+    # Si no es un método POST, renderiza una confirmación
+    return render(request, 'core/confirm_delete.html', {'user': user_to_delete})
+
+@login_required
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            # Autenticar al usuario con el nombre de usuario y la contraseña
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # Iniciar sesión del usuario autenticado
+                login(request, user)
+                return redirect('home')  # Redirige al home o la página que desees
+            else:
+                messages.error(request, "Nombre de usuario o contraseña incorrectos.")
+        else:
+            messages.error(request, "Formulario inválido")
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'core/login.html', {'form': form})

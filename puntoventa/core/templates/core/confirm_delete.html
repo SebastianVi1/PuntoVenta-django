@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="main-box">
+    <h2>Confirmar Borrado</h2>
+    <p>¿Estás seguro de que deseas borrar al usuario <strong>{{ user.username }}</strong>?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn-confirmar">Sí, borrar</button>
+        <a href="{% url 'listar_usuarios' %}" class="btn-cancelar">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
