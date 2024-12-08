@@ -1,104 +1,88 @@
-body, html {
-    font-family: 'Arial', sans-serif;
-    background-color: #F1F0E8;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-* {
-  box-sizing: border-box;
-}
-  /* Contenedor principal para centrar el formulario */
-  .main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
- /* Mantiene la altura completa de la ventana */
-    width: 100%;
-    margin: 0; /* Elimina el margen adicional */
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  
-  /* Contenedor del formulario */
-  .form_register {
-    
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0px 4px 10px #000;
-  }
-  
-  /* Título del formulario */
-  .form_title h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* Estilo para las etiquetas */
-  .form_register label {
-    font-size: 14px;
-    color: #555;
-    display: block;
-    margin-bottom: 8px;
-    text-align: left;
-  }
-  
-  /* Estilo para los inputs */
-  .form_register input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-    outline: none;
-    font-family: 'Montserrat' ,sans-serif;
-    font-weight: 600;
-
-  }
-  
-  .form_register input:focus {
-    border-color: #4d90fe;
-    box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
-  }
-  
-  /* Estilo para el botón */
-  .form_register button {
-    padding: 8px;
-    border-radius: 10px;
-    border: none;
-    outline: 1px solid #48e;
-    width: 100%;
-    margin-top: 40px;
-    font-weight: 700;
-    font-family: 'Montserrat', sans-serif;
-    filter: drop-shadow(0px 0px 2px #000);
+body {
+  background-color: #F1F0E8;
+  font-family: 'Montserrat', sans-serif;
+} 
+html, body {
+  height: 100vh;
 }
 
-.form_register button:hover {
-    border: none;
-    background-color: #48e;
-    color: #fff;
+.main-content {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
 
-  }
+.title_register {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0px;
+  text-wrap: balance;
+}
+.register-box {
+  margin: auto;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 40px;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px #000;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+
+.form-group {
+  padding: 10px;
+
+}
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  margin: 5px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px #0004;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+.form-group input:focus{
+  outline:none;
+  border-color: #4d90fe;
+  box-shadow: 0 0 5px rgba(77, 144, 254);
   
-  /* Estilo para los mensajes de error y éxito */
-  .error-message, .success-message {
-    color: #ff3333;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .success-message {
-    color: #4CAF50;
-  }
-  
+}
+.form-group label {
+  display: block;
+}
+#id_es_admin {
+  box-shadow: none;
+  filter: drop-shadow(0px 0px 10px #0008);
+}
+
+.btn-primary {
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  outline: 1px solid #48e;
+  width: 100%;
+  margin-top: 10px;
+  font-weight: 600;
+  outline: 1px solid #48e;
+  width: 100%;
+  margin-top: 10px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  filter: drop-shadow(0px 0px 2px #000);
+  transition: background-color 0.5s;
+}
+.btn-primary:hover {
+  border: none;
+  background-color: #48e;
+  color: #fff;
+}

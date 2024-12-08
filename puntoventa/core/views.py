@@ -11,6 +11,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 @login_required
@@ -194,45 +195,50 @@ def listar_usuarios(request):
 def is_admin(user):
     return user.is_superuser
 
-#TODO Agregar la pagina a la que el usuario se dirige si no es admin
-# def no_admin(request):
-#     return render(request, 'core/admin_dashboard.html')
 
 @login_required
 def register_user(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            # Guardar usuario
-            user = form.save(commit=False)  # Crear instancia sin guardar aún
+            # Crear usuario sin guardar aún
+            user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])  # Encripta la contraseña
-            user.save()  # Guarda finalmente en la base de datos
             
-            # Aquí puedes manejar campos personalizados como `phone`
-            # Si tienes un modelo adicional para usuarios extendidos, podrías guardarlo aquí
-
+            # Manejar campo personalizado `es_admin`
+            if form.cleaned_data.get('es_admin'):
+                user.is_staff = True  # Hacerlo administrador (puede acceder al panel admin)
+            
+            user.save()  # Guarda el usuario en la base de datos
+            
+            # Mensaje de éxito
             messages.success(request, "Usuario registrado con éxito.")
-            return redirect('login')  # Redirige a la página de inicio de sesión
+            return redirect('users')  # Redirige a la página de inicio de sesión
+        else:
+            # Si hay errores en el formulario
+            messages.error(request, "Por favor corrige los errores.")
     else:
         form = RegisterForm()
+    
     return render(request, 'core/register.html', {'form': form})
+
 
 @login_required
 def delete_user(request, user_id):
 
     if not request.user.is_superuser:
-        return redirect('listar_usuarios')  # Solo superusuarios pueden borrar usuarios
+        return redirect('users')  # Solo superusuarios pueden borrar usuarios
     
     user_to_delete = get_object_or_404(User, id=user_id)
 
     if request.method == 'POST':
         user_to_delete.delete()
-        return redirect('listar_usuarios')  # Redirigir después de borrar al listado de usuarios
+        return redirect('users')  # Redirigir después de borrar al listado de usuarios
 
     # Si no es un método POST, renderiza una confirmación
     return render(request, 'core/confirm_delete.html', {'user': user_to_delete})
 
-@login_required
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -240,12 +246,14 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
 
-            # Autenticar al usuario con el nombre de usuario y la contraseña
+            # Autenticar al usuario
             user = authenticate(username=username, password=password)
             if user is not None:
-                # Iniciar sesión del usuario autenticado
                 login(request, user)
-                return redirect('home')  # Redirige al home o la página que desees
+
+                # Redirigir al 'next' si existe o al home
+                next_url = request.GET.get('next', 'home')
+                return redirect(next_url)
             else:
                 messages.error(request, "Nombre de usuario o contraseña incorrectos.")
         else:
@@ -254,3 +262,6 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'core/login.html', {'form': form})
+def logout_view(request):
+    logout(request)
+    return redirect('login')

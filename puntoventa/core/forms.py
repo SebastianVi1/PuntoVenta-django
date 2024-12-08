@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 class RegisterForm(forms.ModelForm):
+    es_admin = forms.BooleanField(required=False, label="¿Hacer administrador?", help_text="Selecciona esta opción para otorgar privilegios de administrador.")
     phone = forms.CharField(max_length=15, label='Número de teléfono', required=False)  # Campo personalizado
     password = forms.CharField(widget=forms.PasswordInput, label='Contraseña')
     confirm_password = forms.CharField(widget=forms.PasswordInput, label='Confirmar contraseña')
