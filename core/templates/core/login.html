@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block css-styles %}
+    <link rel="stylesheet" href="{% static 'core/css/log-in.css' %}">
+{% endblock css-styles %}
+
+
+{% block content %}
+    <div class="signin-container">
+        
+        <h2 class="signin__title">INICIAR SESION</h2>
+        <form >
+            <input type="text" class="signin__input" placeholder="Usuario">
+            <input type="password" class="signin__input" placeholder="Contrasena">
+            <button class="btn-log-in">Verificar</button>
+        </form>
+    </div>
+{% endblock content %}
+    

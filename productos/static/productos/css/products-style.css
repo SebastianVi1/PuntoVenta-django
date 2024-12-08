@@ -19,8 +19,6 @@ body,html{
     margin-top: 40px;
     box-shadow: 0px 0px 10px #000;
     min-width: 40%;
-    width: 100%;
-    max-width: 70%;
     background-color: #fff;
     border-radius: 10px;
 }
@@ -46,32 +44,26 @@ body,html{
 
 .form-container input{
     width: 100%;
-    padding: 12px;
-    margin-bottom: 5px;
-    border:none;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
+    display: flex;
+    padding: 6px;
     outline: none;
-    font-family: 'Montserrat' ,sans-serif;
+    border:none;
+    border-bottom: 2px solid #0006;
+    border-left: 2px solid #0006;
+    border-radius: 5px;
     font-weight: 600;
 }
-.form-container input:focus{
-    border-color: #4d90fe;
-    box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
-}
+
 .btn-agregar {
     padding: 8px;
     border-radius: 10px;
     border: none;
-    outline: 1px solid #48e;
+    outline: 3px solid #48e;
     width: 100%;
     margin-top: 40px;
     font-weight: 700;
     font-family: 'Montserrat', sans-serif;
     filter: drop-shadow(0px 0px 2px #000);
-    transition: background-color 0.5s;
 }
 
 .btn-agregar:hover {
@@ -94,24 +86,9 @@ body,html{
     border-radius: 10px;
 }
 
-.salir{
-    align-self: start;
-    
-}
-.salir:hover{
-    opacity: 90%;
-}
-.salir a {
-    text-decoration: none;
-}
-.salir img {
-    width: 100%;
-    max-width: 40px;
-    filter: drop-shadow(0px 0px 8px #000);
-}
-
-.messages {
-    width: 100%;
-    text-align: center;
-    
+/* Modal */
+.error_mensaje {
+    width: 300px;
+    height: 100px;
+    background-color: #444;
 }

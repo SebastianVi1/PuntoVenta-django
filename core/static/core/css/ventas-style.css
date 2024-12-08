@@ -1,6 +1,5 @@
-body,html{
+body, html {
     background-color: #F1F0E8;
-    
     height: 100%;
 }
 
@@ -12,26 +11,25 @@ body,html{
     align-items: center;
     width: 100%;
     overflow-y: auto;
-    height: calc(100vh- 89px);
+    height: calc(100vh - 89px);
 }
 
 .main-box {
     margin-top: 40px;
     box-shadow: 0px 0px 10px #000;
     min-width: 40%;
-    width: 100%;
-    max-width: 70%;
     background-color: #fff;
     border-radius: 10px;
+    padding: 20px;
 }
+
 .form-container {
     max-width: 750px;
-    padding:0px 20px 20px 20px;
+    padding: 20px;
     border-radius: 10px;
-
     width: 100%;
-
 }
+
 .title-products {
     text-align: center;
     margin: 0;
@@ -44,42 +42,35 @@ body,html{
     padding: 6px;
 }
 
-.form-container input{
+.form-container input {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 5px;
-    border:none;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
+    padding: 6px;
     outline: none;
-    font-family: 'Montserrat' ,sans-serif;
+    border: none;
+    border-bottom: 2px solid #0006;
+    border-left: 2px solid #0006;
+    border-radius: 5px;
     font-weight: 600;
 }
-.form-container input:focus{
-    border-color: #4d90fe;
-    box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
-}
+
 .btn-agregar {
     padding: 8px;
     border-radius: 10px;
     border: none;
-    outline: 1px solid #48e;
+    outline: 3px solid #48e;
     width: 100%;
     margin-top: 40px;
     font-weight: 700;
     font-family: 'Montserrat', sans-serif;
     filter: drop-shadow(0px 0px 2px #000);
-    transition: background-color 0.5s;
 }
 
 .btn-agregar:hover {
     border: none;
     background-color: #48e;
     color: #fff;
-
 }
+
 .form__textarea {
     display: flex;
     width: 100%;
@@ -87,31 +78,45 @@ body,html{
     border: 2px solid #000;
     resize: vertical;
     min-width: 100%;
-    min-width: 40px;
+    min-height: 40px;
     max-height: 80px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     border-radius: 10px;
 }
 
-.salir{
-    align-self: start;
-    
-}
-.salir:hover{
-    opacity: 90%;
-}
-.salir a {
-    text-decoration: none;
-}
-.salir img {
+.users-table {
     width: 100%;
-    max-width: 40px;
-    filter: drop-shadow(0px 0px 8px #000);
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.messages {
-    width: 100%;
-    text-align: center;
-    
+.users-table th, .users-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.users-table th {
+    background-color: #48e;
+    color: white;
+    text-align: left;
+}
+
+.users-table td {
+    background-color: #fff;
+    color: #333;
+}
+
+.users-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.users-table tr:hover {
+    background-color: #ddd;
+}
+
+.error_mensaje {
+    width: 300px;
+    height: 100px;
+    background-color: #444;
 }

@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block css-styles %}
+    <link rel="stylesheet" href="{% static 'core/css/inventory-style.css' %}">
+{% endblock css-styles %}
+
+
+{% block content %}
+<div class="main-box">
+  
+  <table class="table">
+    <thead>
+        <tr>
+          <th>No.</th>
+          <th>Nombre producto</th>
+          <th>Precio </th>
+          <th>Categoria</th>
+          <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for producto in productos %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><a href="{% url 'modify_product' producto.id_unico %}">{{producto.nombre}}</a></td>
+          <td>{{producto.precio}}</td>
+          <td>{{producto.categoria}}</td>
+          <td>{{producto.stock}}</td>
+          
+        </tr>
+      {% endfor %}
+
+    </tbody>
+    <tfoot>
+      
+    </tfoot>
+  </table>
+</div>
+{% endblock content %}
+    
