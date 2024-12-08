@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+<!-- ETIQUETA DE TITULO -->
+{% block title %}
+    Modificar producto
+{% endblock %}
+
+<!-- ETIQUETA DE CSS -->
+
+ {% block css-styles %}
+  <link rel="stylesheet" href="{% static 'productos/css/products-style.css' %}">
+ {% endblock css-styles %}
+
+
+{% block content %}
+<div class="main-box">
+    <div class="title-products">
+      <h2>Productos</h2>
+    </div>
+    <div class="form-container" >
+      <form name="formulario-productos"  class="agregar-producto" method="post" action="{% url 'modify_product' id_unico=producto.id_unico %}">
+        {% csrf_token %}
+        
+  
+        <label for="categoria_producto">Categoría del producto:</label>
+        <input type="text" name="categoria_producto" value="{{ producto.categoria }}" required>
+  
+        <label for="nombre_producto">Nombre:</label>
+        <input type="text" name="nombre_producto" value="{{ producto.nombre }}" autocomplete="off" required>
+  
+        <label for="precio_producto">Precio:</label>
+        <input type="text" name="precio_producto" value="{{ producto.precio }}" autocomplete="off" required>
+  
+        <label for="stock_producto">Stock:</label>
+        <input type="number" name="stock_producto" value="{{ producto.stock }}" autocomplete="off" required>
+  
+        <label for="descripcion_productos">Descripción del producto:</label>
+        <textarea class="form__textarea" name="descripcion_productos">{{ producto.descripcion }}</textarea>
+  
+        <button type="submit" class="btn-agregar">Guardar cambios</button>
+      </form>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+    
+
+ 

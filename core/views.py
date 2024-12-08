@@ -2,77 +2,43 @@ from django.shortcuts import render, redirect, get_object_or_404
 from productos.models import Producto
 from productos.forms import ProductoForm
 from decimal import Decimal
-from django.contrib import messages
 from .models import ReporteVenta
 from django.db.models import Max
-from django.contrib.auth.models import User
-from .forms import RegisterForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required
 def home(request):
     return render(request, 'core/base.html')
 
-@login_required
+def login(request):
+    return render(request, 'core/login.html')
+
 def sales(request):
     return render(request, 'core/inventory.html')
 
-@login_required
 def inventory(request):
-    orden = request.GET.get('orden', 'nombre')
-    if orden == 'precio':
-        productos = Producto.objects.all().order_by('precio')  # Orden ascendente
-    elif orden == 'categoria':
-        productos = Producto.objects.all().order_by('categoria')
-    elif orden == 'stock':
-        productos = Producto.objects.all().order_by('-stock')  # Orden descendente
-    else:
-        productos = Producto.objects.all()
-
-
+    productos = Producto.objects.all()
     return render(request, 'core/inventory.html', {'productos':productos})
 
-@login_required
 def modify_product(request, id_unico):
      # Obtiene el producto o lanza un error 404 si no existe
     producto = get_object_or_404(Producto, id_unico=id_unico)
-    
     if request.method == 'POST':
-
         # Actualizar los campos del producto con los nuevos datos
         producto.nombre = request.POST.get('nombre_producto', producto.nombre)
+        producto.precio = request.POST.get('precio_producto', producto.precio)
         producto.categoria = request.POST.get('categoria_producto', producto.categoria)
         producto.stock = request.POST.get('stock_producto', producto.stock)
         producto.descripcion = request.POST.get('descripcion_productos', producto.descripcion)
-
-        precio_input = request.POST.get('precio_producto', str(producto.precio))
-        try:
-            producto.precio = Decimal(precio_input.replace(',', '.'))
-        except:
-            producto.precio = producto.precio  # Mantén el valor actual si hay error 
-
-
-        #Guardar los cambios en la base de datos
-        messages.success(request, f'{producto.nombre} Modificado con exito')
+        # Convertir el precio a formato decimal (reemplazar coma por punto)
+        
+        
+        # Guardar los cambios en la base de datos
         producto.save()
         # Redirigir a la página de detalles o la lista de productos
-        #return redirect('modify_product', id_unico=id_unico)  si queremos redirigir a el panel de modificacion
-        return redirect('modify_product', id_unico=id_unico)
+        return redirect('modify_product', producto_id=producto.id_unico)
     return render(request, 'core/modify_product.html', {'producto':producto})
 
-@login_required
-def delete_product(request, id_unico):
-    producto = get_object_or_404(Producto, id_unico=id_unico)
-    if request.method == 'POST':
-        producto.delete()
-        
-        return redirect('inventory')
-    
-@login_required
+
 def ventas(request):
     productos = Producto.objects.all()
     carrito = request.session.get('carrito', [])
@@ -156,7 +122,6 @@ def ventas(request):
         'cambio': float(cambio)
     })
 
-@login_required
 def reporte_ventas(request):
     ventas_agrupadas = {}
     ventas = ReporteVenta.objects.all()
@@ -175,82 +140,11 @@ def reporte_ventas(request):
         ventas_agrupadas[venta.venta_id]['monto_pagado'] = venta.monto_pagado
         ventas_agrupadas[venta.venta_id]['cambio'] = venta.cambio
     
-    return render(request, 'core/reporte-ventas.html', {
+    return render(request, 'core/reporte_ventas.html', {
         'ventas_agrupadas': ventas_agrupadas
     })
 
-@login_required
 def eliminar_todas_ventas(request):
     if request.method == 'POST':
         ReporteVenta.objects.all().delete()
         return redirect('reporte_ventas')
-
-@login_required 
-def listar_usuarios(request):
-    usuarios = User.objects.all()  # Obtiene todos los usuarios
-    return render(request, 'core/users.html', {'usuarios': usuarios})
-
-@login_required
-def is_admin(user):
-    return user.is_superuser
-
-#TODO Agregar la pagina a la que el usuario se dirige si no es admin
-# def no_admin(request):
-#     return render(request, 'core/admin_dashboard.html')
-
-@login_required
-def register_user(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            # Guardar usuario
-            user = form.save(commit=False)  # Crear instancia sin guardar aún
-            user.set_password(form.cleaned_data['password'])  # Encripta la contraseña
-            user.save()  # Guarda finalmente en la base de datos
-            
-            # Aquí puedes manejar campos personalizados como `phone`
-            # Si tienes un modelo adicional para usuarios extendidos, podrías guardarlo aquí
-
-            messages.success(request, "Usuario registrado con éxito.")
-            return redirect('login')  # Redirige a la página de inicio de sesión
-    else:
-        form = RegisterForm()
-    return render(request, 'core/register.html', {'form': form})
-
-@login_required
-def delete_user(request, user_id):
-
-    if not request.user.is_superuser:
-        return redirect('listar_usuarios')  # Solo superusuarios pueden borrar usuarios
-    
-    user_to_delete = get_object_or_404(User, id=user_id)
-
-    if request.method == 'POST':
-        user_to_delete.delete()
-        return redirect('listar_usuarios')  # Redirigir después de borrar al listado de usuarios
-
-    # Si no es un método POST, renderiza una confirmación
-    return render(request, 'core/confirm_delete.html', {'user': user_to_delete})
-
-@login_required
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-
-            # Autenticar al usuario con el nombre de usuario y la contraseña
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                # Iniciar sesión del usuario autenticado
-                login(request, user)
-                return redirect('home')  # Redirige al home o la página que desees
-            else:
-                messages.error(request, "Nombre de usuario o contraseña incorrectos.")
-        else:
-            messages.error(request, "Formulario inválido")
-    else:
-        form = AuthenticationForm()
-
-    return render(request, 'core/login.html', {'form': form})

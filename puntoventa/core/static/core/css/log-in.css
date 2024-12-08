@@ -1,4 +1,5 @@
 /* Estilos generales del cuerpo */
+/* Estilos generales del cuerpo */
 body {
   background-color: #F1F0E8;
   margin: 0;
@@ -15,6 +16,7 @@ aside {
 /* Estilo para el contenedor principal */
 .main-content {
   display: flex;
+  flex-direction: column;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -38,7 +40,22 @@ aside {
   flex-direction: column;
   background-color: #fff;
   padding: 40px;
+  padding: 40px;
   border-radius: 15px;
+  box-shadow: 0 4px 10px #000;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Estilo para los inputs */
+.form_login input {
+  width: 100%;
+  padding: 12px;
+  margin: 5px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
   box-shadow: 0 4px 10px #000;
   width: 100%;
   max-width: 400px;
@@ -71,8 +88,14 @@ aside {
 
 .btn-login  {
   padding: 8px;
+.btn-login  {
+  padding: 8px;
   border-radius: 10px;
   border: none;
+  outline: 1px solid #48e;
+  width: 100%;
+  margin-top: 10px;
+  font-weight: 600;
   outline: 1px solid #48e;
   width: 100%;
   margin-top: 10px;
@@ -83,9 +106,12 @@ aside {
 }
 
 .btn-login:hover {
+
+.btn-login:hover {
   border: none;
   background-color: #48e;
   color: #fff;
+
 
 }
 

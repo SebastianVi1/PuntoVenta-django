@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView, LogoutView
 urlpatterns = [
     path('', views.login_view, name='login'),
     path('home/', views.home, name='home'),
     path('inventory/', views.inventory, name='inventory'),
-    path('sales/', views.sales, name='sales'),
+
     path('modify_product/<uuid:id_unico>/', views.modify_product, name='modify_product'),
     path('delete_product/<uuid:id_unico>/', views.delete_product, name='delete_product'),
     path('ventas/', views.ventas, name='ventas'),
